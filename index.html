@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FIFA World Cup 2026 Premium Stickers</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Inter,sans-serif;
+background:#f7f7f7;
+color:#222;
+}
+
+header{
+background:white;
+padding:50px 20px;
+text-align:center;
+box-shadow:0 3px 10px rgba(0,0,0,.05);
+}
+
+h1{
+font-size:38px;
+}
+
+.subtitle{
+margin-top:10px;
+color:#666;
+}
+
+.search{
+margin:35px auto;
+max-width:500px;
+}
+
+.search input{
+width:100%;
+padding:15px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #ddd;
+}
+
+.grid{
+
+max-width:1200px;
+
+margin:auto;
+
+padding:30px;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+
+gap:25px;
+
+}
+
+.card{
+
+background:white;
+
+border-radius:18px;
+
+overflow:hidden;
+
+box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+transition:.25s;
+
+}
+
+.card:hover{
+
+transform:translateY(-5px);
+
+}
+
+.card img{
+
+width:100%;
+
+height:300px;
+
+object-fit:cover;
+
+background:#eee;
+
+}
+
+.content{
+
+padding:20px;
+
+}
+
+.player{
+
+font-size:22px;
+
+font-weight:700;
+
+}
+
+.team{
+
+color:#666;
+
+margin:5px 0 12px;
+
+}
+
+.badges{
+
+display:flex;
+
+gap:10px;
+
+margin-bottom:15px;
+
+flex-wrap:wrap;
+
+}
+
+.badge{
+
+padding:6px 12px;
+
+border-radius:30px;
+
+font-size:13px;
+
+font-weight:600;
+
+}
+
+.rare{
+
+background:#ffd54f;
+
+}
+
+.available{
+
+background:#d4edda;
+
+color:#1b5e20;
+
+}
+
+.sold{
+
+background:#ffdddd;
+
+color:#b71c1c;
+
+}
+
+.price{
+
+font-size:30px;
+
+font-weight:700;
+
+margin-bottom:20px;
+
+}
+
+button{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+background:#25D366;
+
+color:white;
+
+font-size:16px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+font-weight:600;
+
+}
+
+button:hover{
+
+background:#1db954;
+
+}
+
+button:disabled{
+
+background:#bbb;
+
+cursor:not-allowed;
+
+}
+
+footer{
+
+text-align:center;
+
+padding:40px;
+
+color:#777;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>⚽ FIFA World Cup 2026 Premium Stickers</h1>
+
+<div class="subtitle">
+
+Rare • Mint Condition • Worldwide Shipping
+
+</div>
+
+<div class="search">
+
+<input
+id="search"
+type="text"
+placeholder="Search player..."
+>
+
+</div>
+
+</header>
+
+<div class="grid" id="cards"></div>
+
+<footer>
+
+© 2026 Premium Sticker Collection
+
+</footer>
+
+<script>
+
+const phone="5491112345678"; // CHANGE TO YOUR WHATSAPP
+
+const stickers=[
+
+{
+
+player:"Lionel Messi",
+
+team:"Argentina",
+
+price:80,
+
+number:"#10",
+
+rare:true,
+
+available:true,
+
+image:"images/messi.jpg"
+
+},
+
+{
+
+player:"Cristiano Ronaldo",
+
+team:"Portugal",
+
+price:70,
+
+number:"#7",
+
+rare:true,
+
+available:true,
+
+image:"images/ronaldo.jpg"
+
+},
+
+{
+
+player:"Lamine Yamal",
+
+team:"Spain",
+
+price:45,
+
+number:"#19",
+
+rare:true,
+
+available:true,
+
+image:"images/yamal.jpg"
+
+},
+
+{
+
+player:"Kylian Mbappé",
+
+team:"France",
+
+price:55,
+
+number:"#10",
+
+rare:true,
+
+available:false,
+
+image:"images/mbappe.jpg"
+
+},
+
+{
+
+player:"Erling Haaland",
+
+team:"Norway",
+
+price:42,
+
+number:"#9",
+
+rare:false,
+
+available:true,
+
+image:"images/haaland.jpg"
+
+}
+
+];
+
+const cards=document.getElementById("cards");
+
+function render(data){
+
+cards.innerHTML="";
+
+data.forEach(card=>{
+
+cards.innerHTML+=`
+
+<div class="card">
+
+<img src="${card.image}" alt="${card.player}">
+
+<div class="content">
+
+<div class="player">${card.player}</div>
+
+<div class="team">${card.team} ${card.number}</div>
+
+<div class="badges">
+
+${card.rare?'<span class="badge rare">⭐ Rare</span>':''}
+
+<span class="badge ${card.available?'available':'sold'}">
+
+${card.available?'Available':'Sold'}
+
+</span>
+
+</div>
+
+<div class="price">$${card.price}</div>
+
+<button
+
+${card.available?'':'disabled'}
+
+onclick="buy('${card.player}')">
+
+${card.available?'Buy via WhatsApp':'Sold'}
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+render(stickers);
+
+document.getElementById("search")
+
+.addEventListener("keyup",e=>{
+
+const q=e.target.value.toLowerCase();
+
+render(
+
+stickers.filter(s=>
+
+s.player.toLowerCase().includes(q)
+
+||
+
+s.team.toLowerCase().includes(q)
+
+)
+
+);
+
+});
+
+function buy(player){
+
+const text=
+
+encodeURIComponent(
+
+`Hi! I'm interested in buying the ${player} sticker.`
+
+);
+
+window.open(
+
+`https://wa.me/${phone}?text=${text}`,
+
+"_blank"
+
+);
+
+}
+
+</script>
+
+</body>
+
+</html>
